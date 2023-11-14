@@ -26,6 +26,7 @@ class SettingsState with SettingsStateMappable {
   final bool https;
   final SendMode sendMode;
   final bool saveWindowPlacement;
+  final bool autoPasteOnReceiveText;
   final bool enableAnimations;
   final DeviceType? deviceType;
   final String? deviceModel;
@@ -51,5 +52,6 @@ class SettingsState with SettingsStateMappable {
     required this.enableAnimations,
     required this.deviceType,
     required this.deviceModel,
+    required this.autoPasteOnReceiveText,
   });
 }

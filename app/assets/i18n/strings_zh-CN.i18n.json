@@ -108,7 +108,8 @@
       "destination": "保存目录",
       "downloads": "(下载)",
       "saveToGallery": "保存到相册",
-      "saveToHistory": "保存到历史记录"
+      "saveToHistory": "保存到历史记录",
+      "autoPaste": "接收到文本时自动粘贴"
     },
     "network": {
       "title": "网络",

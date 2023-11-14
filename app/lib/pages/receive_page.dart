@@ -8,8 +8,10 @@ import 'package:localsend_app/pages/progress_page.dart';
 import 'package:localsend_app/pages/receive_options_page.dart';
 import 'package:localsend_app/provider/network/server/server_provider.dart';
 import 'package:localsend_app/provider/selection/selected_receiving_files_provider.dart';
+import 'package:localsend_app/provider/settings_provider.dart';
 import 'package:localsend_app/theme.dart';
 import 'package:localsend_app/util/ip_helper.dart';
+import 'package:localsend_app/util/native/keypress_simulate.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/ui/snackbar.dart';
 import 'package:localsend_app/widget/device_bage.dart';
@@ -48,6 +50,20 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
       _message = receiveSession.message;
       _isLink = _message != null && (_message!.startsWith('http://') || _message!.startsWith('https'));
     });
+    // 如果接收方的设置中启用了“接收到文本时自动粘贴”，就自动隐藏窗口并模拟复制粘贴
+    if (_message != null && ref.read(settingsProvider).autoPasteOnReceiveText) {
+      await Future.delayed(const Duration(seconds: 1));
+      await switchAndPasteText();
+      _acceptNothing();
+      // 自动退出页面
+      // ignore: use_build_context_synchronously
+      context.pop();
+    }
+  }
+
+  Future<void> switchAndPasteText() async {
+    if (_message == null) return;
+    await simulateCopyPaste(text: _message!);
   }
 
   void _acceptNothing() {

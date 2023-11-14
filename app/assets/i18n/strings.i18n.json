@@ -108,7 +108,8 @@
       "destination": "Destination",
       "downloads": "(Downloads)",
       "saveToGallery": "Save media to gallery",
-      "saveToHistory": "Save to history"
+      "saveToHistory": "Save to history",
+      "autoPaste": "Auto paste content"
     },
     "network": {
       "title": "Network",

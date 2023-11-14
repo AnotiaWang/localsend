@@ -472,6 +472,7 @@ class _StringsSettingsTabReceiveZhCn extends _StringsSettingsTabReceiveEn {
 	@override String get downloads => '(下载)';
 	@override String get saveToGallery => '保存到相册';
 	@override String get saveToHistory => '保存到历史记录';
+	@override String get autoPaste => '接收到文本时自动粘贴';
 }
 
 // Path: settingsTab.network

@@ -239,7 +239,9 @@ class ReceiveController {
         for (final f in dto.files.values) f.id: f.fileName,
       };
     } else {
-      if (checkPlatformHasTray() && (await windowManager.isMinimized() || !(await windowManager.isVisible()) || !(await windowManager.isFocused()))) {
+      if (checkPlatformHasTray() &&
+          !settings.autoPasteOnReceiveText &&
+          (await windowManager.isMinimized() || !(await windowManager.isVisible()) || !(await windowManager.isFocused()))) {
         await showFromTray();
       }
 

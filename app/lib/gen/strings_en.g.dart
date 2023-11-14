@@ -542,6 +542,7 @@ class _StringsSettingsTabReceiveEn {
 	String get downloads => '(Downloads)';
 	String get saveToGallery => 'Save media to gallery';
 	String get saveToHistory => 'Save to history';
+	String get autoPaste => 'Auto paste content';
 }
 
 // Path: settingsTab.network

@@ -40,6 +40,7 @@ class SettingsService extends Notifier<SettingsState> {
       enableAnimations: _service.getEnableAnimations(),
       deviceType: _service.getDeviceType(),
       deviceModel: _service.getDeviceModel(),
+      autoPasteOnReceiveText: _service.getAutoPasteOnReceiveText() ?? false,
     );
   }
 
@@ -173,6 +174,13 @@ class SettingsService extends Notifier<SettingsState> {
     await _service.setDeviceModel(deviceModel);
     state = state.copyWith(
       deviceModel: deviceModel,
+    );
+  }
+
+  Future<void> setAutoPasteOnReceiveText(bool autoPaste) async {
+    await _service.setAutoPasteOnReceiveText(autoPaste);
+    state = state.copyWith(
+      autoPasteOnReceiveText: autoPaste,
     );
   }
 }

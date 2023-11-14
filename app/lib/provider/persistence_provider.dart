@@ -63,6 +63,7 @@ const _sendMode = 'ls_send_mode';
 const _enableAnimations = 'ls_enable_animations';
 const _deviceType = 'ls_device_type';
 const _deviceModel = 'ls_device_model';
+const _autoSaveOnReceiveText = 'ls_auto_save_on_receive_text';
 
 final persistenceProvider = Provider<PersistenceService>((ref) {
   throw Exception('persistenceProvider not initialized');
@@ -356,6 +357,14 @@ class PersistenceService {
 
   Future<void> setDeviceModel(String deviceModel) async {
     await _prefs.setString(_deviceModel, deviceModel);
+  }
+
+  bool? getAutoPasteOnReceiveText() {
+    return _prefs.getBool(_autoSaveOnReceiveText);
+  }
+
+  Future<void> setAutoPasteOnReceiveText(bool autoPasteOnReceiveText) async {
+    await _prefs.setBool(_autoSaveOnReceiveText, autoPasteOnReceiveText);
   }
 
   Future<void> clear() async {
