@@ -34,6 +34,8 @@ enum FilePickerOption {
   media(Icons.image),
   text(Icons.subject),
   app(Icons.apps),
+  right(Icons.east),
+  left(Icons.west),
   clipboard(Icons.paste);
 
   const FilePickerOption(this.icon);
@@ -50,6 +52,10 @@ enum FilePickerOption {
         return t.sendTab.picker.media;
       case FilePickerOption.text:
         return t.sendTab.picker.text;
+      case FilePickerOption.left:
+        return "左";
+      case FilePickerOption.right:
+        return "右";
       case FilePickerOption.app:
         return t.sendTab.picker.app;
       case FilePickerOption.clipboard:
@@ -67,6 +73,8 @@ enum FilePickerOption {
         FilePickerOption.text,
         FilePickerOption.file,
         FilePickerOption.folder,
+        FilePickerOption.right,
+        FilePickerOption.left,
       ];
     } else if (checkPlatform([TargetPlatform.android])) {
       // On android, the file app is most powerful.
@@ -77,6 +85,8 @@ enum FilePickerOption {
         FilePickerOption.text,
         FilePickerOption.folder,
         FilePickerOption.app,
+        FilePickerOption.right,
+        FilePickerOption.left,
       ];
     } else {
       // Desktop
@@ -116,6 +126,14 @@ class PickFileAction extends AsyncGlobalAction {
       case FilePickerOption.text:
         // ignore: use_build_context_synchronously
         await _pickText(context, ref);
+        break;
+      case FilePickerOption.right:
+      // ignore: use_build_context_synchronously
+        await right(context, ref);
+        break;
+      case FilePickerOption.left:
+      // ignore: use_build_context_synchronously
+        await left(context, ref);
         break;
       case FilePickerOption.clipboard:
         // ignore: use_build_context_synchronously
@@ -237,6 +255,16 @@ Future<void> _pickText(BuildContext context, Ref ref) async {
   if (result != null) {
     ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction(message: result));
   }
+}
+
+Future<void> right(BuildContext context, Ref ref) async {
+  //发送arrow_right_alt
+  ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction( message: 'arrow_right_alt'));
+}
+
+Future<void> left(BuildContext context, Ref ref) async {
+  //发送arrow_left_alt
+  ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction( message: 'arrow_left_alt'));
 }
 
 Future<void> _pickClipboard(BuildContext context, Ref ref) async {
