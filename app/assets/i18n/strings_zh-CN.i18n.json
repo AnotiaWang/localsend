@@ -62,7 +62,8 @@
       "text": "文本",
       "app": "应用",
       "clipboard": "剪贴板",
-      "TransitionSlide": "切换"
+      "simulateSlideRight": "下一页",
+      "simulateSlideLeft": "前一页"
     },
     "shareIntentInfo": "你也可以使用你的移动设备中的“分享”功能来更简单的选择文件。",
     "nearbyDevices": "附近的设备",

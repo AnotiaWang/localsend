@@ -424,6 +424,8 @@ class _StringsSendTabPickerZhCn extends _StringsSendTabPickerEn {
 	@override String get text => '文本';
 	@override String get app => '应用';
 	@override String get clipboard => '剪贴板';
+	@override String get simulateSlideRight => '下一页';
+	@override String get simulateSlideLeft => '前一页';
 }
 
 // Path: sendTab.sendModes

@@ -53,9 +53,9 @@ enum FilePickerOption {
       case FilePickerOption.text:
         return t.sendTab.picker.text;
       case FilePickerOption.left:
-        return "左";
+        return t.sendTab.picker.simulateSlideLeft;
       case FilePickerOption.right:
-        return "右";
+        return t.sendTab.picker.simulateSlideRight;
       case FilePickerOption.app:
         return t.sendTab.picker.app;
       case FilePickerOption.clipboard:

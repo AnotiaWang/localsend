@@ -61,7 +61,9 @@
       "media": "Media",
       "text": "Text",
       "app": "App",
-      "clipboard": "Paste"
+      "clipboard": "Paste",
+      "simulateSlideRight": "Next Page",
+      "simulateSlideLeft": "Prev Page"
     },
     "shareIntentInfo": "You can also use the \"Share\" feature of your mobile device to select files more easily.",
     "nearbyDevices": "Nearby devices",

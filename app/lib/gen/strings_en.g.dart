@@ -494,6 +494,8 @@ class _StringsSendTabPickerEn {
 	String get text => 'Text';
 	String get app => 'App';
 	String get clipboard => 'Paste';
+	String get simulateSlideRight => 'Next Page';
+	String get simulateSlideLeft => 'Prev Page';
 }
 
 // Path: sendTab.sendModes
