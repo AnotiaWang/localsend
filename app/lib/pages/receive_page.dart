@@ -56,10 +56,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
     });
 
     if (_message == 'arrow_right_alt' || _message == 'arrow_left_alt') {
-      final key = _message == 'arrow_right_alt'
-          ? LogicalKeyboardKey.arrowRight
-          : LogicalKeyboardKey.arrowLeft;
-      await keyPressSimulator.simulateKeyPress(key: key);
+      await simulateSwitchPowerPoint(_message == 'arrow_right_alt');
       await Future.delayed(const Duration(milliseconds: 300));
       _acceptNothing();
       // 自动退出页面
@@ -67,19 +64,15 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
       context.pop();
     }
     // 如果接收方的设置中启用了“接收到文本时自动粘贴”，就自动隐藏窗口并模拟复制粘贴
-    else if (_message != null && ref.read(settingsProvider).autoPasteOnReceiveText) {
+    else if (_message != null &&
+        ref.read(settingsProvider).autoPasteOnReceiveText) {
       await Future.delayed(const Duration(seconds: 1));
-      await switchAndPasteText();
+      await simulateCopyPaste(text: _message!);
       _acceptNothing();
       // 自动退出页面
       // ignore: use_build_context_synchronously
       context.pop();
     }
-  }
-
-  Future<void> switchAndPasteText() async {
-    if (_message == null) return;
-    await simulateCopyPaste(text: _message!);
   }
 
   void _acceptNothing() {
