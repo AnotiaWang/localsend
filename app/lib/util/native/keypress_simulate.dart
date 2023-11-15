@@ -12,7 +12,7 @@ Future<void> _hideWindowIfFocused() async {
   if (await windowManager.isFocused()) {
     final ModifierKey modifier = Platform.isMacOS
         ? ModifierKey.metaModifier
-        : ModifierKey.controlModifier;
+        : ModifierKey.altModifier;
     await keyPressSimulator
         .simulateKeyPress(key: LogicalKeyboardKey.tab, modifiers: [modifier]);
     await keyPressSimulator.simulateKeyPress(
@@ -26,7 +26,7 @@ Future<void> _hideWindowIfFocused() async {
 Future<void> simulateCopyPaste({required String text}) async {
   if (!checkPlatformIsDesktop()) return;
   final ModifierKey modifier =
-      Platform.isMacOS ? ModifierKey.metaModifier : ModifierKey.controlModifier;
+      Platform.isMacOS ? ModifierKey.metaModifier : ModifierKey.altModifier;
 
   await Clipboard.setData(ClipboardData(text: text));
 
