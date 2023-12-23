@@ -63,7 +63,8 @@
       "app": "App",
       "clipboard": "Paste",
       "simulateSlideRight": "Next Page",
-      "simulateSlideLeft": "Prev Page"
+      "simulateSlideLeft": "Prev Page",
+      "phoneRing": "Phone Ring"
     },
     "shareIntentInfo": "You can also use the \"Share\" feature of your mobile device to select files more easily.",
     "nearbyDevices": "Nearby devices",

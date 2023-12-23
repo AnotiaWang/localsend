@@ -522,6 +522,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.18"
+  flutter_native_helper:
+    dependency: "direct main"
+    description:
+      name: flutter_native_helper
+      sha256: "8547f79dff1939cbf61d97fa067da7606d89cfc7ebb8baec9f86a1f00537af7b"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.7"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

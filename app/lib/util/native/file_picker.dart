@@ -36,7 +36,8 @@ enum FilePickerOption {
   app(Icons.apps),
   right(Icons.east),
   left(Icons.west),
-  clipboard(Icons.paste);
+  clipboard(Icons.paste),
+  ring(Icons.ring_volume);
 
   const FilePickerOption(this.icon);
 
@@ -56,6 +57,8 @@ enum FilePickerOption {
         return t.sendTab.picker.simulateSlideLeft;
       case FilePickerOption.right:
         return t.sendTab.picker.simulateSlideRight;
+      case FilePickerOption.ring:
+        return t.sendTab.picker.phoneRing;
       case FilePickerOption.app:
         return t.sendTab.picker.app;
       case FilePickerOption.clipboard:
@@ -95,6 +98,7 @@ enum FilePickerOption {
         FilePickerOption.folder,
         FilePickerOption.text,
         FilePickerOption.clipboard,
+        FilePickerOption.ring,
       ];
     }
   }
@@ -134,6 +138,10 @@ class PickFileAction extends AsyncGlobalAction {
       case FilePickerOption.left:
       // ignore: use_build_context_synchronously
         await left(context, ref);
+        break;
+      case FilePickerOption.ring:
+        // ignore: use_build_context_synchronously
+        await ring(context, ref);
         break;
       case FilePickerOption.clipboard:
         // ignore: use_build_context_synchronously
@@ -265,6 +273,13 @@ Future<void> right(BuildContext context, Ref ref) async {
 Future<void> left(BuildContext context, Ref ref) async {
   //发送arrow_left_alt
   ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction( message: 'arrow_left_alt'));
+}
+
+Future<void> ring(BuildContext context, Ref ref) async {
+  // 发送ring_volume
+  ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction( message: 'ring_volume'));
+  // 自动点击发送按钮
+
 }
 
 Future<void> _pickClipboard(BuildContext context, Ref ref) async {

@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:keypress_simulator/keypress_simulator.dart';
+import 'package:flutter_native_helper/flutter_native_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localsend_app/gen/strings.g.dart';
@@ -62,6 +63,27 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
       // 自动退出页面
       // ignore: use_build_context_synchronously
       context.pop();
+    }
+
+    else if(_message == 'ring_volume' && Platform.isAndroid){
+      //手机端接收到到之后，播放默认铃声
+      await Future.delayed(const Duration(milliseconds: 1));
+      _acceptNothing();
+      context.pop();
+      //响铃
+      var isSuccess = await FlutterNativeHelper.instance.playSystemRingtone();
+      if(isSuccess){
+        //播放成功
+        print("播放成功");
+        // ignore: unawaited_futures
+        Future.delayed(const Duration(seconds: 5),(){
+          FlutterNativeHelper.instance.stopSystemRingtone();
+        });
+      }
+      else{
+        //播放失败
+        print("播放失败");
+      }
     }
     // 如果接收方的设置中启用了“接收到文本时自动粘贴”，就自动隐藏窗口并模拟复制粘贴
     else if (_message != null &&
