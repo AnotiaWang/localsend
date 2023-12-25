@@ -54,6 +54,11 @@ class ReceiveController {
   void installRoutes({
     required Router router,
     required String alias,
+
+    /// Installs a route for receiving image requests.
+    void _installImageRequestRoute() {
+      // TODO: Implement the route for receiving image requests
+    }
     required int port,
     required bool https,
     required String fingerprint,
@@ -91,6 +96,10 @@ class ReceiveController {
     router.post(ApiRoute.prepareUpload.v1, (Request request) async {
       return _prepareUploadHandler(
           request: request, port: port, https: https, v2: false);
+    });
+
+    router.post(ApiRoute.receiveImages, (Request request) async {
+      return _receiveImageRequestHandler(request);
     });
 
     router.post(ApiRoute.prepareUpload.v2, (Request request) async {
@@ -629,6 +638,11 @@ class ReceiveController {
     }
 
     return server.responseJson(403, message: 'Invalid token');
+  }
+
+  Future<Response> _receiveImageRequestHandler(Request request) async {
+    // TODO: Handle the image request and store the received images
+    return server.responseJson(200, message: 'Image request handled.');
   }
 
   void acceptFileRequest(Map<String, String> fileNameMap) {
