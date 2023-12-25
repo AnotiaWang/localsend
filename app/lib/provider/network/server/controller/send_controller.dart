@@ -26,6 +26,11 @@ const _uuid = Uuid();
 class SendController {
   final ServerUtils server;
 
+  /// Sends an image fetch request to the mobile device.
+  Future<void> sendImageFetchRequest(String deviceId) async {
+    // TODO: Implement the actual request logic here
+  }
+
   SendController(this.server);
 
   /// Installs all routes for receiving files.
