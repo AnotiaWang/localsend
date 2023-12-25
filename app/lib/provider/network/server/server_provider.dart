@@ -49,6 +49,15 @@ class ServerService extends Notifier<ServerState?> {
     return startServer(
       alias: settings.alias,
       port: settings.port,
+  /// Sends a request to fetch images from the mobile device.
+  Future<void> sendImageFetchRequest(String deviceId) async {
+    await _sendController.sendImageFetchRequest(deviceId);
+  }
+
+  /// Handles the response from the mobile device for the image fetch request.
+  Future<void> receiveImageFetchResponse(String deviceId, List<String> imagePaths) async {
+    await _receiveController.receiveImageFetchResponse(deviceId, imagePaths);
+  }
       https: settings.https,
     );
   }
@@ -78,6 +87,11 @@ class ServerService extends Notifier<ServerState?> {
       https: https,
       fingerprint: fingerprint,
       showToken: ref.read(settingsProvider).showToken,
+    );
+    _sendController.installRoutes(
+      router: router,
+      alias: alias,
+      fingerprint: fingerprint,
     );
     _sendController.installRoutes(
       router: router,
@@ -214,6 +228,11 @@ Future<HttpServer> _startServer({
 //   final server = await (securityContext == null
 //       ? HttpServer.bind(address, port)
 //       : HttpServer.bindSecure(
+    _sendController.installRoutes(
+      router: router,
+      alias: alias,
+      fingerprint: fingerprint,
+    );
 //     address,
 //     port,
 //     securityContext,
