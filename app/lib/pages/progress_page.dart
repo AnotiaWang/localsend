@@ -15,7 +15,7 @@ import 'package:localsend_app/theme.dart';
 import 'package:localsend_app/util/file_size_helper.dart';
 import 'package:localsend_app/util/file_speed_helper.dart';
 import 'package:localsend_app/util/native/open_file.dart';
-import 'package:localsend_app/util/native/open_folder.dart';
+import 'package:localsend_app/util/native/open_file.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/ui/nav_bar_padding.dart';
 import 'package:localsend_app/widget/custom_progress_bar.dart';
@@ -200,7 +200,7 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                         ? null
                                         : (TapGestureRecognizer()
                                           ..onTap = () async {
-                                            await openFolder(receiveSession.destinationDirectory);
+                                            await openGalleryImage(receiveSession.destinationDirectory);
                                           }),
                                   ),
                                 ],
@@ -263,7 +263,7 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                     splashFactory: NoSplash.splashFactory,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: filePath != null && receiveSession != null ? () async => openFile(context, file.fileType, filePath!) : null,
+                    onTap: filePath != null && receiveSession != null ? () async => openGalleryImage(filePath!) : null,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
