@@ -120,6 +120,7 @@ class _StringsSendTabEn {
 	String get sendModeHelp => 'Explanation';
 	String get help => 'Please ensure that the desired target is also in the same wifi network.';
 	String get placeItems => 'Place items to share.';
+	String get viewMobilePictures => 'View Mobile Pictures';
 }
 
 // Path: settingsTab
