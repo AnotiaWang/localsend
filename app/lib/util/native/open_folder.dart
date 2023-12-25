@@ -3,11 +3,10 @@ import 'package:open_filex/open_filex.dart';
 
 final _logger = Logger('OpenFolder');
 
-/// Opens the selected file which is stored on the device.
-Future<void> openFolder(String path) async {
-  if (!path.endsWith('/')) {
-    path = '$path/';
-  }
-  final result = await OpenFilex.open(path);
-  _logger.info('Open folder result: ${result.message}, path: $path');
+/// Retrieves an image from the device's gallery at the specific path.
+Future<void> openGalleryImage(String path) async {
+  final asset = await PhotoManager.getAssetFromGallery(path: path);
+  final file = await asset.file;
+  OpenFilex.open(file.path);
+  _logger.info('Open gallery image result: success, path: ${file.path}');
 }
