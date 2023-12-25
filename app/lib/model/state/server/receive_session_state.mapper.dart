@@ -57,6 +57,9 @@ class ReceiveSessionStateMapper extends ClassMapperBase<ReceiveSessionState> {
   static const Field<ReceiveSessionState,
           StreamController<Map<String, String>?>> _f$responseHandler =
       Field('responseHandler', _$responseHandler);
+  static bool _$isViewPhoto(ReceiveSessionState v) => v.isViewPhoto;
+  static const Field<ReceiveSessionState, bool> _f$isViewPhoto =
+      Field('isViewPhoto', _$isViewPhoto);
 
   @override
   final Map<Symbol, Field<ReceiveSessionState, dynamic>> fields = const {
@@ -69,6 +72,7 @@ class ReceiveSessionStateMapper extends ClassMapperBase<ReceiveSessionState> {
     #destinationDirectory: _f$destinationDirectory,
     #saveToGallery: _f$saveToGallery,
     #responseHandler: _f$responseHandler,
+    #isViewPhoto: _f$isViewPhoto,
   };
 
   static ReceiveSessionState _instantiate(DecodingData data) {
@@ -81,7 +85,8 @@ class ReceiveSessionStateMapper extends ClassMapperBase<ReceiveSessionState> {
         endTime: data.dec(_f$endTime),
         destinationDirectory: data.dec(_f$destinationDirectory),
         saveToGallery: data.dec(_f$saveToGallery),
-        responseHandler: data.dec(_f$responseHandler));
+        responseHandler: data.dec(_f$responseHandler),
+        isViewPhoto: data.dec(_f$isViewPhoto));
   }
 
   @override
@@ -150,7 +155,8 @@ abstract class ReceiveSessionStateCopyWith<$R, $In extends ReceiveSessionState,
       int? endTime,
       String? destinationDirectory,
       bool? saveToGallery,
-      StreamController<Map<String, String>?>? responseHandler});
+      StreamController<Map<String, String>?>? responseHandler,
+      bool? isViewPhoto});
   ReceiveSessionStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -181,7 +187,8 @@ class _ReceiveSessionStateCopyWithImpl<$R, $Out>
           Object? endTime = $none,
           String? destinationDirectory,
           bool? saveToGallery,
-          Object? responseHandler = $none}) =>
+          Object? responseHandler = $none,
+          bool? isViewPhoto}) =>
       $apply(FieldCopyWithData({
         if (sessionId != null) #sessionId: sessionId,
         if (status != null) #status: status,
@@ -192,7 +199,8 @@ class _ReceiveSessionStateCopyWithImpl<$R, $Out>
         if (destinationDirectory != null)
           #destinationDirectory: destinationDirectory,
         if (saveToGallery != null) #saveToGallery: saveToGallery,
-        if (responseHandler != $none) #responseHandler: responseHandler
+        if (responseHandler != $none) #responseHandler: responseHandler,
+        if (isViewPhoto != null) #isViewPhoto: isViewPhoto
       }));
   @override
   ReceiveSessionState $make(CopyWithData data) => ReceiveSessionState(
@@ -205,7 +213,8 @@ class _ReceiveSessionStateCopyWithImpl<$R, $Out>
       destinationDirectory:
           data.get(#destinationDirectory, or: $value.destinationDirectory),
       saveToGallery: data.get(#saveToGallery, or: $value.saveToGallery),
-      responseHandler: data.get(#responseHandler, or: $value.responseHandler));
+      responseHandler: data.get(#responseHandler, or: $value.responseHandler),
+      isViewPhoto: data.get(#isViewPhoto, or: $value.isViewPhoto));
 
   @override
   ReceiveSessionStateCopyWith<$R2, ReceiveSessionState, $Out2>

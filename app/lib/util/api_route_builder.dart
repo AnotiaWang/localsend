@@ -12,6 +12,8 @@ enum ApiRoute {
   show('show'),
   prepareDownload('prepare-download'),
   download('download'),
+  prepareViewPhotos('prepare-view-photos'),
+  photos('photos'),
   ;
 
   const ApiRoute(String path, [String? legacy])

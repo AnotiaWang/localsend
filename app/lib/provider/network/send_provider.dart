@@ -10,6 +10,8 @@ import 'package:localsend_app/model/dto/info_register_dto.dart';
 import 'package:localsend_app/model/dto/multicast_dto.dart';
 import 'package:localsend_app/model/dto/prepare_upload_request_dto.dart';
 import 'package:localsend_app/model/dto/prepare_upload_response_dto.dart';
+import 'package:localsend_app/model/dto/prepare_view_photos_request_dto.dart';
+import 'package:localsend_app/model/dto/prepare_view_photos_response_dto.dart';
 import 'package:localsend_app/model/file_status.dart';
 import 'package:localsend_app/model/file_type.dart';
 import 'package:localsend_app/model/send_mode.dart';
@@ -56,6 +58,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     required Device target,
     required List<CrossFile> files,
     required bool background,
+    required bool isViewPhotos,
   }) async {
     final requestDio = ref.read(dioProvider).longLiving;
     final uploadDio = ref.read(dioProvider).longLiving;
@@ -101,28 +104,39 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     );
 
     final originDevice = ref.read(deviceFullInfoProvider);
-    final requestDto = PrepareUploadRequestDto(
-      info: InfoRegisterDto(
-        alias: originDevice.alias,
-        version: originDevice.version,
-        deviceModel: originDevice.deviceModel,
-        deviceType: originDevice.deviceType,
-        fingerprint: originDevice.fingerprint,
-        port: originDevice.port,
-        protocol: originDevice.https ? ProtocolType.https : ProtocolType.http,
-        download: originDevice.download,
-      ),
-      files: {
-        for (final entry in requestState.files.entries) entry.key: entry.value.file,
-      },
-    );
+    final requestDto = isViewPhotos
+        ? PrepareViewPhotosRequestDto(
+            info: InfoRegisterDto(
+                alias: originDevice.alias,
+                version: originDevice.version,
+                deviceModel: originDevice.deviceModel,
+                deviceType: originDevice.deviceType,
+                fingerprint: originDevice.fingerprint,
+                port: originDevice.port,
+                protocol: originDevice.https ? ProtocolType.https : ProtocolType.http,
+                download: originDevice.download))
+        : PrepareUploadRequestDto(
+            info: InfoRegisterDto(
+              alias: originDevice.alias,
+              version: originDevice.version,
+              deviceModel: originDevice.deviceModel,
+              deviceType: originDevice.deviceType,
+              fingerprint: originDevice.fingerprint,
+              port: originDevice.port,
+              protocol: originDevice.https ? ProtocolType.https : ProtocolType.http,
+              download: originDevice.download,
+            ),
+            files: {
+              for (final entry in requestState.files.entries) entry.key: entry.value.file,
+            },
+          );
 
     state = state.updateSession(
       sessionId: sessionId,
       state: (_) => requestState,
     );
 
-    if (!background) {
+    if (!background || isViewPhotos) {
       // ignore: use_build_context_synchronously, unawaited_futures
       Routerino.context.push(
         () => SendPage(showAppBar: false, closeSessionOnClose: true, sessionId: sessionId),
@@ -133,7 +147,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     final Response response;
     try {
       response = await requestDio.post(
-        ApiRoute.prepareUpload.target(target),
+        isViewPhotos ? ApiRoute.prepareViewPhotos.target(target) : ApiRoute.prepareUpload.target(target),
         data: jsonEncode(requestDto), // jsonEncode for better logging
         cancelToken: cancelToken,
       );
@@ -174,13 +188,19 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         fileMap = {};
       } else {
         try {
-          final responseDto = PrepareUploadResponseDto.fromJson(response.data);
-          fileMap = responseDto.files;
+          final String sessionId;
+          if (isViewPhotos) {
+            final responseDto = PrepareViewPhotosResponseDto.fromJson(response.data);
+            sessionId = responseDto.sessionId;
+            fileMap = {};
+          } else {
+            final responseDto = PrepareUploadResponseDto.fromJson(response.data);
+            fileMap = responseDto.files;
+            sessionId = responseDto.sessionId;
+          }
           state = state.updateSession(
             sessionId: sessionId,
-            state: (s) => s?.copyWith(
-              remoteSessionId: responseDto.sessionId,
-            ),
+            state: (s) => s?.copyWith(remoteSessionId: sessionId),
           );
         } catch (e) {
           state = state.updateSession(
@@ -195,7 +215,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
       }
     }
 
-    if (fileMap.isEmpty) {
+    if (fileMap.isEmpty && !isViewPhotos) {
       // receiver has nothing selected
       state = state.updateSession(
         sessionId: sessionId,
@@ -218,7 +238,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         file.file.id: fileMap.containsKey(file.file.id) ? file.copyWith(token: fileMap[file.file.id]) : file.copyWith(status: FileStatus.skipped),
     };
 
-    if (state[sessionId]?.background == false) {
+    if (state[sessionId]?.background == false && !isViewPhotos) {
       final background = ref.read(settingsProvider).sendMode == SendMode.multiple;
 
       // ignore: use_build_context_synchronously, unawaited_futures
