@@ -74,7 +74,7 @@ class ReceiveHistoryPage extends StatelessWidget {
                       ? null
                       : () async {
                           final destination = ref.read(settingsProvider).destination ?? await getDefaultDestinationDirectory();
-                          await openFolder(destination);
+                          await openGalleryImage(destination);
                         },
                   icon: const Icon(Icons.folder),
                   label: Text(t.receiveHistoryPage.openFolder),
