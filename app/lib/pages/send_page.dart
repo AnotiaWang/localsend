@@ -76,8 +76,33 @@ class _SendPageState extends State<SendPage> with Refena {
                 child: Column(
                   children: [
                     Expanded(
-                      child: Column(
-                        children: [
+                      child: ListView.builder(
+                        itemCount: 3, // Including the new 'View Mobile Pictures' option
+                        itemBuilder: (context, index) {
+                          if(index == 0) return InitialSlideTransition(
+                            origin: const Offset(0, -1),
+                            duration: const Duration(milliseconds: 400),
+                            child: DeviceListTile(
+                              device: myDevice,
+                            ),
+                          );
+                          if(index == 1) return const SizedBox(height: 20);
+                          if(index == 2) return const InitialFadeTransition(
+                            duration: Duration(milliseconds: 300),
+                            delay: Duration(milliseconds: 400),
+                            child: Icon(Icons.arrow_downward),
+                          );
+                          // Adding 'View Mobile Pictures' ListTile
+                          if(index == 3) return ListTile(
+                            leading: Icon(Icons.image),
+                            title: Text('View Mobile Pictures'),
+                            onTap: () {
+                              // TODO: Implement image fetch from the mobile device
+                            },
+                          );
+                          return SizedBox.shrink(); // Fallback for unhandled indices
+                        },
+                      ),
                           InitialSlideTransition(
                             origin: const Offset(0, -1),
                             duration: const Duration(milliseconds: 400),
