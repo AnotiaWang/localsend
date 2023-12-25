@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:localsend/util/native/open_folder.dart';
+import 'package:localsend_app/util/native/open_gallery_image.dart';
 
 class ViewMobilePicturesPage extends StatefulWidget {
   @override
