@@ -210,6 +210,7 @@ class SendTab extends StatelessWidget {
                           isFavorite: isFavorite,
                           onFavoriteTap: () async => await vm.onToggleFavorite(device),
                           onTap: () async => await vm.onTapDevice(context, device),
+                          onViewPhotosTap: () async => await vm.onTapViewDeviceImages(context, device),
                         ),
                 ),
               );

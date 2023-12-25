@@ -200,6 +200,7 @@ class _StringsReceivePageZhCn extends _StringsReceivePageEn {
 		one: '想要发送给你一个文件。',
 		other: '想要发送给你 ${n} 个文件。',
 	);
+	@override String get subTitleViewPhoto => '想要查看此设备上的图片。';
 	@override String get subTitleMessage => '发送给你了一条消息：';
 	@override String get subTitleLink => '发送给你了一个链接：';
 	@override String get canceled => '发送者取消了请求。';
@@ -426,6 +427,8 @@ class _StringsSendTabPickerZhCn extends _StringsSendTabPickerEn {
 	@override String get clipboard => '剪贴板';
 	@override String get simulateSlideRight => '下一页';
 	@override String get simulateSlideLeft => '前一页';
+	@override String get phoneRing => '查找手机';
+	@override String get viewPhonePhoto => '查看手机照片';
 }
 
 // Path: sendTab.sendModes

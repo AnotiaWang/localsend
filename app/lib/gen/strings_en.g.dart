@@ -200,6 +200,7 @@ class _StringsReceivePageEn {
 		one: 'wants to send you a file.',
 		other: 'wants to send you ${n} files.',
 	);
+	String get subTitleViewPhoto => 'wants to view photos on this device.';
 	String get subTitleMessage => 'sent you a message:';
 	String get subTitleLink => 'sent you a link:';
 	String get canceled => 'The sender has canceled the request.';
@@ -496,6 +497,7 @@ class _StringsSendTabPickerEn {
 	String get app => 'App';
 	String get clipboard => 'Paste';
 	String get simulateSlideRight => 'Next Page';
+	String get viewPhonePhoto => 'Phone Photos';
 	String get simulateSlideLeft => 'Prev Page';
 	String get phoneRing => 'Phone Ring';
 }

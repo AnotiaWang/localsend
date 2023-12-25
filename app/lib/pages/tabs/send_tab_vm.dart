@@ -35,6 +35,7 @@ class SendTabVm {
   final Future<void> Function(Device device) onToggleFavorite;
   final Future<void> Function(BuildContext context, Device device) onTapDevice;
   final Future<void> Function(BuildContext context, Device device) onTapDeviceMultiSend;
+  final Future<void> Function(BuildContext context, Device device) onTapViewDeviceImages;
 
   const SendTabVm({
     required this.sendMode,
@@ -48,6 +49,7 @@ class SendTabVm {
     required this.onToggleFavorite,
     required this.onTapDevice,
     required this.onTapDeviceMultiSend,
+    required this.onTapViewDeviceImages,
   });
 }
 
@@ -75,11 +77,7 @@ final sendTabVmProvider = ViewProvider((ref) {
         builder: (_) => const AddressInputDialog(),
       );
       if (device != null && context.mounted) {
-        await ref.notifier(sendProvider).startSession(
-              target: device,
-              files: files,
-              background: false,
-            );
+        await ref.notifier(sendProvider).startSession(target: device, files: files, background: false, isViewPhotos: false);
       }
     },
     onTapFavorite: (context) async {
@@ -94,11 +92,7 @@ final sendTabVmProvider = ViewProvider((ref) {
           return;
         }
 
-        await ref.notifier(sendProvider).startSession(
-              target: device,
-              files: files,
-              background: false,
-            );
+        await ref.notifier(sendProvider).startSession(target: device, files: files, background: false, isViewPhotos: false);
       }
     },
     onTapSendMode: (context, mode) async {
@@ -136,11 +130,7 @@ final sendTabVmProvider = ViewProvider((ref) {
         return;
       }
 
-      await ref.notifier(sendProvider).startSession(
-            target: device,
-            files: selectedFiles,
-            background: false,
-          );
+      await ref.notifier(sendProvider).startSession(target: device, files: selectedFiles, background: false, isViewPhotos: false);
     },
     onTapDeviceMultiSend: (context, device) async {
       final session = ref.read(sendProvider).values.firstWhereOrNull((s) => s.target.ip == device.ip);
@@ -172,11 +162,10 @@ final sendTabVmProvider = ViewProvider((ref) {
         ref.notifier(sendProvider).closeSession(session.sessionId);
       }
 
-      await ref.notifier(sendProvider).startSession(
-            target: device,
-            files: files,
-            background: true,
-          );
+      await ref.notifier(sendProvider).startSession(target: device, files: files, background: true, isViewPhotos: false);
+    },
+    onTapViewDeviceImages: (context, device) async {
+      await ref.notifier(sendProvider).startSession(target: device, files: selectedFiles, background: false, isViewPhotos: true);
     },
   );
 });

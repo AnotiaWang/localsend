@@ -63,6 +63,7 @@
       "app": "App",
       "clipboard": "Paste",
       "simulateSlideRight": "Next Page",
+      "viewPhonePhoto": "Phone Photos",
       "simulateSlideLeft": "Prev Page",
       "phoneRing": "Phone Ring"
     },
@@ -170,6 +171,7 @@
       "one": "wants to send you a file.",
       "other": "wants to send you {n} files."
     },
+    "subTitleViewPhoto": "wants to view photos on this device.",
     "subTitleMessage": "sent you a message:",
     "subTitleLink": "sent you a link:",
     "canceled": "The sender has canceled the request."

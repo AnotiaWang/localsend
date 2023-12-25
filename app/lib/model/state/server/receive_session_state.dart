@@ -19,6 +19,8 @@ class ReceiveSessionState with ReceiveSessionStateMappable {
   final String destinationDirectory;
   final bool saveToGallery;
   final StreamController<Map<String, String>?>? responseHandler;
+  // 发送方想要查看设备的照片。此种情况下 request 内容不应该有文件
+  final bool isViewPhoto;
 
   const ReceiveSessionState({
     required this.sessionId,
@@ -30,11 +32,13 @@ class ReceiveSessionState with ReceiveSessionStateMappable {
     required this.destinationDirectory,
     required this.saveToGallery,
     required this.responseHandler,
+    required this.isViewPhoto,
   });
 
   /// Returns the message of this request if this is a "message request".
   /// Message requests must contain a single text file with preview included.
   String? get message {
+    if (files.isEmpty) return null;
     final firstFile = files.values.first.file;
     return files.length == 1 && firstFile.fileType == FileType.text ? firstFile.preview : null;
   }

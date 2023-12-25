@@ -64,7 +64,8 @@
       "clipboard": "剪贴板",
       "simulateSlideRight": "下一页",
       "simulateSlideLeft": "前一页",
-      "phoneRing": "查找手机"
+      "phoneRing": "查找手机",
+      "viewPhonePhoto": "查看手机照片"
     },
     "shareIntentInfo": "你也可以使用你的移动设备中的“分享”功能来更简单的选择文件。",
     "nearbyDevices": "附近的设备",
@@ -169,6 +170,7 @@
       "one": "想要发送给你一个文件。",
       "other": "想要发送给你 {n} 个文件。"
     },
+    "subTitleViewPhoto": "想要查看此设备上的图片。",
     "subTitleMessage": "发送给你了一条消息：",
     "subTitleLink": "发送给你了一个链接：",
     "canceled": "发送者取消了请求。"
