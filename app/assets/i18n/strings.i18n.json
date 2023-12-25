@@ -78,7 +78,8 @@
     },
     "sendModeHelp": "Explanation",
     "help": "Please ensure that the desired target is also in the same wifi network.",
-    "placeItems": "Place items to share."
+    "placeItems": "Place items to share.",
+    "viewMobilePictures": "View Mobile Pictures"
   },
   "settingsTab": {
     "title": "Settings",
