@@ -77,7 +77,7 @@ class _SendPageState extends State<SendPage> with Refena {
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: 3, // Including the new 'View Mobile Pictures' option
+                        itemCount: 4, // Including the new 'View Mobile Pictures' option
                         itemBuilder: (context, index) {
                           if(index == 0) return InitialSlideTransition(
                             origin: const Offset(0, -1),
@@ -97,7 +97,8 @@ class _SendPageState extends State<SendPage> with Refena {
                             leading: Icon(Icons.image),
                             title: Text('View Mobile Pictures'),
                             onTap: () {
-                              // TODO: Implement image fetch from the mobile device
+                              // Triggering the correct action for image fetch
+                              ref.read(sendProvider.notifier).sendImageFetchRequest(ref.read(deviceFullInfoProvider).deviceId);
                             },
                           );
                           return SizedBox.shrink(); // Fallback for unhandled indices
