@@ -12,7 +12,10 @@ class ImageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Image getImage(int index) {
-    return _images[index];
+  Image? getImage(int index) {
+    if (index >= 0 && index < _images.length) {
+      return _images[index];
+    }
+    return null;
   }
 }
