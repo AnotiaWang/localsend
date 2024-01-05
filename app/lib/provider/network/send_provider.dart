@@ -39,10 +39,16 @@ final _logger = Logger('Send');
 ///
 /// In contrast to [serverProvider], this provider does not manage a server.
 /// Instead, it only does HTTP requests to other servers.
+/// This provider manages sending files to other devices.
+///
+/// In contrast to [serverProvider], this provider does not manage a server.
+/// Instead, it only does HTTP requests to other servers.
 final sendProvider = NotifierProvider<SendNotifier, Map<String, SendSessionState>>((ref) {
   return SendNotifier();
 });
 
+/// This class manages the state and behavior of the sending files process.
+/// This class manages the state and behavior of the sending files process.
 class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   SendNotifier();
 
@@ -54,7 +60,10 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   /// Starts a session.
   /// If [background] is true, then the session closes itself on success and no pages will be open
   /// If [background] is false, then this method will open pages by itself and waits for user input to close the session.
-  Future<void> startSession({
+  /// Starts a session.
+/// If [background] is true, then the session closes itself on success and no pages will be open
+/// If [background] is false, then this method will open pages by itself and waits for user input to close the session.
+Future<void> startSession({
     required Device target,
     required List<CrossFile> files,
     required bool background,
@@ -265,7 +274,13 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     await _send(sessionId, uploadDio, target, sendingFiles);
   }
 
-  Future<void> _send(String sessionId, Dio dio, Device target, Map<String, SendingFile> files) async {
+  /// Sends the files to the target device.
+/// 
+/// [sessionId] - The ID of the session.
+/// [dio] - The Dio instance used for the request.
+/// [target] - The target Device to which the files are being sent.
+/// [files] - The map of files to be sent with the corresponding SendingFile objects.
+Future<void> _send(String sessionId, Dio dio, Device target, Map<String, SendingFile> files) async {
     bool hasError = false;
     final remoteSessionId = state[sessionId]!.remoteSessionId;
 
@@ -369,7 +384,10 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   }
 
   /// Closes the send-session and sends a cancel event to the receiver.
-  void cancelSession(String sessionId) {
+  /// Closes the send-session and sends a cancel event to the receiver.
+/// 
+/// [sessionId] - The ID of the session.
+void cancelSession(String sessionId) {
     final sessionState = state[sessionId];
     if (sessionState == null) {
       return;
@@ -392,7 +410,10 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     closeSession(sessionId);
   }
 
-  void cancelSessionByReceiver(String sessionId) {
+  /// Cancels the session by the receiver.
+/// 
+/// [sessionId] - The ID of the session.
+void cancelSessionByReceiver(String sessionId) {
     final sessionState = state[sessionId];
     if (sessionState == null) {
       return;
@@ -409,7 +430,10 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   }
 
   /// Closes the session
-  void closeSession(String sessionId) {
+  /// Closes the session and performs associated cleanup activities.
+/// 
+/// [sessionId] - The ID of the session.
+void closeSession(String sessionId) {
     final sessionState = state[sessionId];
     if (sessionState == null) {
       return;
