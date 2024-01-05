@@ -13,6 +13,8 @@ dependencies:
   flutter_native_helper: ^0.0.7
   basic_utils: 5.6.1
   collection: ^1.17.2 # allow newer versions, so it can compile with newer Flutter versions
+  basic_utils: 5.6.1
+  collection: ^1.17.2
   common:
     path: ../common
   connectivity_plus: 5.0.1
@@ -28,7 +30,33 @@ dependencies:
     sdk: flutter
   flutter_displaymode: 0.6.0
   flutter_localizations:
-    sdk: flutter
+    connectivity_plus: 5.0.1
+    dart_mappable: 3.3.1
+    desktop_drop: 0.4.4
+    device_apps: 2.2.0
+    device_info_plus: 9.1.0
+    dio: 5.3.3
+    dynamic_color: 1.6.8
+    file_picker: 5.5.0
+    file_selector: 1.0.1
+    flutter:
+      sdk: flutter
+    flutter_displaymode: 0.6.0
+    flutter_localizations:
+    flutter_markdown: 0.6.18
+    gal: 2.1.2
+    image_picker: 1.0.4
+    intl: ^0.18.0
+    keypress_simulator: ^0.1.0
+    launch_at_startup: 0.2.2
+    logging: 1.2.0
+    mime: 1.0.4
+    network_info_plus: 4.1.0
+    open_filex: 4.3.4
+    package_info_plus: 4.2.0
+    pasteboard: ^0.2.0
+    path: 1.8.3
+    path_provider: 2.1.1
   flutter_markdown: 0.6.18
   gal: 2.1.2
   image_picker: 1.0.4
@@ -58,6 +86,12 @@ dependencies:
   slang: 3.25.0
   slang_flutter: 3.25.0
   system_settings: 2.1.0
+  tray_manager:
+    # https://github.com/leanflutter/tray_manager/issues/30
+    # The Linux tray manager is disabled for now
+    git:
+      url: https://github.com/Tienisto/tray_manager.git
+      ref: b37f5e088e0f02c45a684ae41e9d2da2d5c596db
   system_tray: 2.0.3
   tray_manager:
     # https://github.com/leanflutter/tray_manager/issues/30
