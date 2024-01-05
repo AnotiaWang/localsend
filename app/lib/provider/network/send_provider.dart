@@ -188,19 +188,19 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         fileMap = {};
       } else {
         try {
-          final String sessionId;
+          final String remoteSessionId;
           if (isViewPhotos) {
             final responseDto = PrepareViewPhotosResponseDto.fromJson(response.data);
-            sessionId = responseDto.sessionId;
+            remoteSessionId = responseDto.sessionId;
             fileMap = {};
           } else {
             final responseDto = PrepareUploadResponseDto.fromJson(response.data);
             fileMap = responseDto.files;
-            sessionId = responseDto.sessionId;
+            remoteSessionId = responseDto.sessionId;
           }
           state = state.updateSession(
             sessionId: sessionId,
-            state: (s) => s?.copyWith(remoteSessionId: sessionId),
+            state: (s) => s?.copyWith(remoteSessionId: remoteSessionId),
           );
         } catch (e) {
           state = state.updateSession(
