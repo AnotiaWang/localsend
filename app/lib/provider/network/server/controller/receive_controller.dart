@@ -31,6 +31,7 @@ import 'package:localsend_app/util/api_route_builder.dart';
 import 'package:localsend_app/util/file_path_helper.dart';
 import 'package:localsend_app/util/native/file_saver.dart';
 import 'package:localsend_app/util/native/get_destination_directory.dart';
+import 'package:localsend_app/util/native/photo_helper.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/native/tray_helper.dart';
 import 'package:logging/logging.dart';
@@ -40,8 +41,6 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_manager/window_manager.dart';
-
-import '../../../../util/native/photo_helper.dart';
 
 const _uuid = Uuid();
 
