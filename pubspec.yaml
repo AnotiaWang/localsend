@@ -13,7 +13,7 @@ void sortPubspecDependencies() {
 
     pubspecYaml['dependencies'] = sortedDependencies;
 
-    final updatedContent = prettyYamlString(pubspecYaml);
+    final updatedContent = prettyYamlString(pubspecYaml);  final updatedContent = prettyYamlString(pubspecYaml);
     pubspecFile.writeAsStringSync(updatedContent);
   }
 }
