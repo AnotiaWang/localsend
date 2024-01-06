@@ -1,0 +1,28 @@
+import 'dart:io';
+import 'package:yaml/yaml.dart';
+
+void sortPubspecDependencies() {
+  final pubspecFile = File('pubspec.yaml');
+  final pubspecContent = pubspecFile.readAsStringSync();
+  final pubspecYaml = loadYaml(pubspecContent);
+
+  final dependencies = pubspecYaml['dependencies'];
+  if (dependencies is YamlMap) {
+    final sortedDependencies = Map.fromEntries(dependencies.entries.toList()
+      ..sort((a, b) => a.key.compareTo(b.key)));
+
+    pubspecYaml['dependencies'] = sortedDependencies;
+
+    final updatedContent = prettyYamlString(pubspecYaml);
+    pubspecFile.writeAsStringSync(updatedContent);
+  }
+}
+
+String prettyYamlString(dynamic yaml) {
+  final buffer = StringBuffer();
+  final emitter = YamlEmitter(buffer);
+  emitter.indentation = 2;
+  emitter.width = 80;
+  emitter.emit(yaml);
+  return buffer.toString();
+}
