@@ -428,7 +428,6 @@ class _StringsSendTabPickerZhCn extends _StringsSendTabPickerEn {
 	@override String get simulateSlideRight => '下一页';
 	@override String get simulateSlideLeft => '前一页';
 	@override String get phoneRing => '查找手机';
-	@override String get viewPhonePhoto => '查看手机照片';
 }
 
 // Path: sendTab.sendModes

@@ -496,7 +496,6 @@ class _StringsSendTabPickerEn {
 	String get app => 'App';
 	String get clipboard => 'Paste';
 	String get simulateSlideRight => 'Next Page';
-	String get viewPhonePhoto => 'Phone Photos';
 	String get simulateSlideLeft => 'Prev Page';
 	String get phoneRing => 'Phone Ring';
 }
